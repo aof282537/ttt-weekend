@@ -1,5 +1,5 @@
 /*-------------------------------- Constants --------------------------------*/
-const winningCombos = [[]]
+const winningCombos = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [2, 4, 6], [0, 4, 8]]
 
 /*---------------------------- Variables (state) ----------------------------*/
 let board, turn, winner
@@ -9,7 +9,7 @@ let board, turn, winner
 
 
 /*------------------------ Cached Element References ------------------------*/
-const squareEls = document.querySelector(".square")
+const squareEls = document.querySelectorAll(".square")
 const messageEl = document.querySelector("#message")
 
 console.log(squareEls)
@@ -17,6 +17,12 @@ console.log(messageEl)
 
 
 /*----------------------------- Event Listeners -----------------------------*/
+squareEls.forEach(function(square) {
+  square.addEventListener('click', handleClick)
+}) 
+
+//event bubbling
+
 
 
 
@@ -31,23 +37,31 @@ function init() {
 }
 
 function render() {
-  board.foreach((square, index) => {
+  board.forEach((square, index) => {
+    //console.log(index)
+    console.log(squareEls[index])
     if (square === -1) {
-      squareEls[index].textcontent = "O"
+      squareEls[index].textContent = "O"
     } else if (square === 1) {
-      squareEls[index].textcontent = "X"
+      squareEls[index].textContent = "X"
     } else {
-      squareEls[index].textcontent = null
+      squareEls[index].textContent = null
     }
   });
 
 
   if (winner === null) {
-    return (turn === 1 ? messageEl.textcontent = "Player 1's turn!!!" : messageEl.textContent = "Players 2's turn!!!") 
+    turn === 1 ? messageEl.textContent = "Player 1's turn!!!" : messageEl.textContent = "Players 2's turn!!!" 
   } else if (winner === "T") {
-    return messageEl.textcontent = "We are tie!!"
+    messageEl.textContent = "We are tie!!"
   } else { 
-    return (winner === 1 ? messageEl.textcontent = "Player 1 has won!!!" : messageEl.textcontent = "player 2 has won!!!")
+    winner === 1 ? messageEl.textContent = "Player 1 has won!!!" : messageEl.textContent = "player 2 has won!!!"
   }
 }
 
+function handleClick(event) {
+  const sqIdx = parseInt(event.target.id.slice(2)) 
+  console.log(typeof sqIdx)
+  //console.log('squareIndex' , sqIdx) 
+  //console.log('It work')
+}
