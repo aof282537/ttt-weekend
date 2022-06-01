@@ -8,7 +8,7 @@ let board, turn, winner
 
 
 /*------------------------ Cached Element References ------------------------*/
-const squareEls = document.querySelector(".box")
+const squareEls = document.querySelector(".square")
 const messageEl = document.querySelector("#message")
 
 console.log(squareEls)
@@ -20,12 +20,27 @@ console.log(messageEl)
 
 
 /*-------------------------------- Functions --------------------------------*/
-init ()
+init()
 
 function init() {
   board = [null, null, null, null, null, null, null, null, null,]
   turn = 1
   winner = null
+  render()
+}
 
+function render() {
+  board.foreach((square, index) => {
+    if (square === 1) {
+      squareEls[index].textcontent = "O"
+    } else if (square === -1) {
+      squareEls[index].textcontent = "X"
+    } else {
+      squareEls[index].textcontent = null
+    }
+  });
 
+  if (winner === null) {
+    return (turn === 1 )
+  }
 }
