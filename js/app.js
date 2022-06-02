@@ -60,8 +60,35 @@ function render() {
 }
 
 function handleClick(event) {
-  const sqIdx = parseInt(event.target.id.slice(2)) 
-  console.log(typeof sqIdx)
+  const sqIdx = parseInt(event.target.id.slice(2))
+  if (board === sqIdx){
+    return
+  } else if (winner !== null) {
+    return
+  }
+  //console.log(typeof sqIdx)
   //console.log('squareIndex' , sqIdx) 
   //console.log('It work')
+  board[sqIdx] = turn
+  turn = turn * (-1)
+
+  getWinner ()
+  render ()
 }
+
+function getWinner() {
+  for (let i = 0; i < winningCombos.length; i++) {
+    if (board[winningCombos[i][0]] + board[winningCombos[i][1]] + board[winningCombos[i][2]] === 3) {
+      winner = 1
+    } else if
+      (board[winningCombos[i][0]] + board[winningCombos[i][1]] + board[winningCombos[i][2]] === -3) {
+      winner = -1
+      } else {
+        return null
+      }
+    }
+    render()
+  }
+
+
+
